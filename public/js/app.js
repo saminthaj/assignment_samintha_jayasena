@@ -73148,8 +73148,6 @@ function (_Component) {
   }, {
     key: "renderStudents",
     value: function renderStudents() {
-      var _this2 = this;
-
       return this.state.students.map(function (students) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: students.id,
@@ -73160,22 +73158,17 @@ function (_Component) {
           to: '/edit_student/' + students.id //params={{ student_id:students.id  }}
           ,
           className: "btn btn-sm btn-success float-right"
-        }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: function onClick() {
-            return _this2.handleDelete(students.id);
-          },
-          className: "btn btn-sm btn-warning float-right"
-        }, "Delete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
+        }, "Update")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
       });
     } // get all the students from backend
 
   }, {
     key: "getStudents",
     value: function getStudents() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.get("api/student_index").then(function (response) {
-        return _this3.setState({
+        return _this2.setState({
           students: _toConsumableArray(response.data.students)
         });
       });
@@ -73214,7 +73207,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-5"
+        className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73246,7 +73239,7 @@ function (_Component) {
       }, "DOB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: 'text',
+        type: 'date',
         onChange: this.handleChange,
         value: this.state.dob,
         className: "form-control",
@@ -73307,6 +73300,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -73339,6 +73334,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(StudentEdit).call(this, props));
     _this.state = {
       name: '',
+      dob: "",
+      "class": "",
       student: []
     }; // bind
 
@@ -73352,9 +73349,11 @@ function (_Component) {
   _createClass(StudentEdit, [{
     key: "handleChange",
     value: function handleChange(e) {
-      this.setState({
-        name: e.target.value
-      }); // console.log(e.target.value);
+      // this.setState({
+      //     name: e.target.value
+      // });
+      // console.log(e.target.value);
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     } // handle submit
 
   }, {
@@ -73379,7 +73378,9 @@ function (_Component) {
       axios.get("api/student_edit/".concat(this.props.match.params.id, "/edit")).then(function (response) {
         return _this3.setState({
           student: response.data.student,
-          name: response.data.student.name
+          name: response.data.student.name,
+          dob: response.data.student.dob,
+          "class": response.data.student["class"]
         });
       });
     } // lifecycle mehtod
@@ -73406,16 +73407,48 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "email",
+        className: "col-md-4 col-form-label text-md-right"
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: 'text',
         onChange: this.handleChange,
         value: this.state.name,
         className: "form-control",
-        rows: "5",
-        maxLength: "255",
-        placeholder: "Create a new task",
-        required: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        placeholder: "Enter Name",
+        name: 'name'
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "email",
+        className: "col-md-4 col-form-label text-md-right"
+      }, "DOB"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: 'text',
+        onChange: this.handleChange,
+        value: this.state.dob,
+        className: "form-control",
+        placeholder: "Enter Date of Birth",
+        name: 'dob'
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "email",
+        className: "col-md-4 col-form-label text-md-right"
+      }, "Class"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: 'text',
+        onChange: this.handleChange,
+        value: this.state["class"],
+        name: 'class',
+        className: "form-control",
+        placeholder: "Enter class"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
       }, "Edit Student")))))));

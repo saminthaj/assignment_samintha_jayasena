@@ -98,12 +98,12 @@ class Example extends Component{
                             className="btn btn-sm btn-success float-right">
                             Update
                         </Link>
-                        <button
-                            onClick={() => this.handleDelete(students.id)}
-                            className="btn btn-sm btn-warning float-right"
-                        >
-                            Delete
-                        </button>
+                        {/*<button*/}
+                        {/*    onClick={() => this.handleDelete(students.id)}*/}
+                        {/*    className="btn btn-sm btn-warning float-right"*/}
+                        {/*>*/}
+                        {/*    Delete*/}
+                        {/*</button>*/}
                     </div>
                     <hr />
                 </div>
@@ -140,7 +140,7 @@ class Example extends Component{
                     <div className="row">
                         <div className="container">
                             {/*<div className="row justify-content-left">*/}
-                            <div className="col-md-5">
+                            <div className="col-md-12">
                                 <div className="card">
                                     <div className="card-header">Student</div>
 
@@ -164,7 +164,7 @@ class Example extends Component{
                                             <div className="form-group row">
                                                 <label htmlFor="email" className="col-md-4 col-form-label text-md-right">DOB</label>
                                                 <div className="col-md-6">
-                                                    <input type={'text'}
+                                                    <input type={'date'}
                                                            onChange={this.handleChange}
                                                            value={this.state.dob}
                                                            className="form-control"
