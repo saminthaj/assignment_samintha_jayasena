@@ -1,5 +1,7 @@
-Backend- PHP with Laravel Framework
+Backend- PHP with Laravel Framework    
+
 Frontend- React
+
 Database- Mysql
 
 
